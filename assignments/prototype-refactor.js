@@ -151,7 +151,7 @@ const archer = new Humanoid({
         'Bow',
         'Dagger',
     ],
-    language: 'Elvish',
+    language: 'Elvish',    
 });
 
 console.log(mage.createdAt); // Today's date
