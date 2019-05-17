@@ -42,13 +42,13 @@ class Instructor extends Person {
     }
     //Why doesn't it like a string and why did it want to put am underscore in front of the parameter?
     // took out string that was passed as param
-    demo() {
-        console.log(`Today we are learning about ${this.subject}`)
+    demo(subject) {
+        return( `Today we are learning about ${subject}`)
     }
     // What is the syntax for passing an object?
     // took out "this. from subject" also made subject not a string in param
     grade(student, subject) {
-        console.log(`${student.name} receives a perfect score on ${subject}`)
+        return (`${student} receives a perfect score on ${subject}`)
     }
 }
 
@@ -73,23 +73,14 @@ class Student extends Person {
         this.className = StudStats.className;
         this.favSubjects = StudStats.favSubjects;
     }
-    listsSubjects() {
-        return `${this.favSubjects}`
+    listsSubjects(subject) {
+        return `${subject}`
     }
-    PRAssignment() {
-        return `${this.className} has submitted a PR for ${this.favSubjects}`
+    PRAssignment(subject) {
+        return `${student.name} has submitted a PR for ${subject}`
     }
 }
-// created student object
-const student = new Student({
-    name: 'Elan',
-    location: "The Borough of",
-    age: 23,
-    favLanguage: "JavaScript",
-    specialty: "Explaining with patience",
-    catchPhrase: "Don't be like Elan!",
 
-})
 
 
 // #### Project Manager
@@ -103,9 +94,41 @@ const student = new Student({
 // * `standUp` a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!
 // * `debugsCode` a method that takes in a student object and a subject and logs out `{name} debugs {student.name}'s code on {subject}`
 
+class ProjectManager extends Instructor {
+    constructor(pmAttr) {
+        super(pmAttr);
+        this.gradClassName = pmAttr.gradClassName;
+        this.favInstructor = pmAttr.favInstructor;
+    }
 
+    standUp(name, channel) {
+        return (`${name} announces to ${channel}, @channel stand times!`);
+    }
 
-//
+    debugsCode(subject) {
+        return (`${this.name} debugs ${student.name}'s code on ${subject}`);
+    }
+}
+// created student object
+const student = new Student({
+    name: 'Melanie',
+    location: "The Boondocks",
+    age: 31,
+    favLanguage: "JavaScript",
+    specialty: "Explaining with patience",
+    catchPhrase: "I love coding!",
+
+})
+
+// created PM object
+const projectManager = new ProjectManager({
+    name: "Adam",
+    gradClassName: "Web 19",
+    favInstructor: "Josh Knell",
+    channel: "Web20",
+
+})
+// created Instructor object
 const fred = new Instructor({
     name: 'Fred',
     location: 'Bedrock',
@@ -117,5 +140,10 @@ const fred = new Instructor({
 // correctly called fred.grade, changed "subject" to a subject
 fred.grade(student, "Constructors");
 
-
-
+console.log(fred.speak());
+console.log(fred.demo("JavaScript"));
+console.log(fred.grade("Melanie", "JS Sprint"));
+console.log(student.listsSubjects("Coding, English, Art"));
+console.log(student.PRAssignment("JavaScript"));
+console.log(projectManager.standUp("Adam","WEb20"));
+console.log(projectManager.debugsCode("VS Code"));
